@@ -1,0 +1,339 @@
+CREATE TABLE NHANVIEN (
+    MaNV CHAR(6) PRIMARY KEY,
+    HoTenNV NVARCHAR(30),
+    GioiTinh CHAR(3),
+    NgaySinh DATE,
+    DiaChi NVARCHAR(255),
+    DienThoai CHAR(10)
+);
+INSERT INTO NHANVIEN (MaNV, HoTenNV, GioiTinh, NgaySinh, DiaChi, DienThoai)
+VALUES ('NV001', N'Trần Văn A', 'Nam', '1990-01-01', N'Hà Nội', '0123456789'),
+       ('NV002', N'Nguyễn Thị B', 'Nữ', '1995-05-15', N'Hồ Chí Minh', '0987654321'),
+       ('NV003', N'Phạm Văn C', 'Nam', '1985-12-31', N'Đà Nẵng', '0364869457'),
+	   ('NV004', N'Nguyễn Văn D', 'Nam', '1992-08-20', N'Hải Phòng', '0369871234'),
+	   ('NV005', N'Lê Thị E', 'Nữ', '1998-03-10', N'Bình Dương', '0912345678'),
+	   ('NV006', N'Phan Văn F', 'Nam', '1987-05-25', N'Cần Thơ', '0354689752'),
+	   ('NV007', N'Trần Thị G', 'Nữ', '1994-12-05', N'Hồ Chí Minh', '0987654321'),
+	   ('NV008', N'Huỳnh Văn H', 'Nam', '1991-10-15', N'Đà Nẵng', '0364869457'),
+	   ('NV009', N'Ngô Thị I', 'Nữ', '1989-07-03', N'Hà Nội', '0123456789'),
+	   ('NV010', N'Đặng Văn K', 'Nam', '1996-04-18', N'TP.HCM', '0364861122');
+
+
+CREATE TABLE KHACHHANG (
+    MaKH CHAR(6) PRIMARY KEY,
+    HoTenKH NVARCHAR(30),
+    DiaChi NVARCHAR(255),
+    DienThoai CHAR(10)
+);
+INSERT INTO KHACHHANG (MaKH, HoTenKH, DiaChi, DienThoai)
+VALUES ('KH001', N'Lê Thị X', N'Hải Phòng', '0369874123'),
+       ('KH002', N'Hoàng Văn Y', N'Bình Dương', '0912345678'),
+       ('KH003', N'Vũ Thị Z', N'Cần Thơ', '0354689752'),
+	   ('KH004', N'Trần Văn L', N'Hà Nội', '0987654321'),
+       ('KH005', N'Lê Thị M', N'Hồ Chí Minh', '0912345678'),
+       ('KH006', N'Nguyễn Văn N', N'Đà Nẵng', '0364869457'),
+       ('KH007', N'Phạm Thị O', N'Hải Phòng', '0369874123'),
+       ('KH008', N'Huỳnh Văn P', N'Bình Dương', '0354689752'),
+       ('KH009', N'Đỗ Thị Q', N'Cần Thơ', '0123456789'),
+       ('KH010', N'Vũ Văn R', N'TP.HCM', '0364861122');
+
+
+CREATE TABLE HOADON (
+    MaHD CHAR(6) PRIMARY KEY,
+    MaKH CHAR(6),
+    MaNV CHAR(6),
+    NgayLapHD DATE,
+    TongTien FLOAT,
+    FOREIGN KEY (MaKH) REFERENCES KHACHHANG(MaKH),
+    FOREIGN KEY (MaNV) REFERENCES NHANVIEN(MaNV)
+);
+INSERT INTO HOADON (MaHD, MaKH, MaNV, NgayLapHD, TongTien)
+VALUES ('HD001', 'KH001', 'NV001', '2024-02-21', 50000000),
+       ('HD002', 'KH002', 'NV002', '2024-03-22', 14500000),
+       ('HD003', 'KH003', 'NV003', '2024-04-01',  2500000),
+	   ('HD004', 'KH004', 'NV004', '2024-06-20', 75000000),
+       ('HD005', 'KH005', 'NV005', '2024-06-12', 38000000),
+       ('HD006', 'KH006', 'NV006', '2024-07-26', 15000000),
+       ('HD007', 'KH007', 'NV007', '2024-08-28', 22000000),
+       ('HD008', 'KH008', 'NV008', '2024-09-27', 45000000),
+       ('HD009', 'KH009', 'NV009', '2024-11-27', 3000000),
+       ('HD010', 'KH010', 'NV010', '2024-12-28', 6000000);
+
+
+CREATE TABLE HANG (
+    MaHang CHAR(6) PRIMARY KEY,
+    TenHang NVARCHAR(50),
+    DiaChi NVARCHAR(255)
+);
+INSERT INTO HANG (MaHang, TenHang, DiaChi)
+VALUES ('H001', N'Hàng điện tử', N'Hà Nội'),
+       ('H002', N'Hàng gia dụng', N'Hồ Chí Minh'),
+       ('H003', N'Hàng thời trang', N'Đà Nẵng'),
+	   ('H004', N'Hàng gia dụng cao cấp', N'Hà Nội'),
+       ('H005', N'Hàng điện máy', N'Hồ Chí Minh'),
+       ('H006', N'Hàng mỹ phẩm', N'Đà Nẵng'),
+       ('H007', N'Hàng tiêu dùng', N'Hải Phòng'),
+       ('H008', N'Hàng gia dụng thông thường', N'Bình Dương'),
+       ('H009', N'Hàng thể thao', N'Cần Thơ'),
+       ('H010', N'Hàng gia dụng gia đình', N'TP.HCM');
+
+
+CREATE TABLE SANPHAM (
+    MaSP CHAR(10) PRIMARY KEY,
+    TenSP NVARCHAR(255),
+    DonViTinh NVARCHAR(10),
+    GiaBan FLOAT,
+    MaHang CHAR(6),
+    FOREIGN KEY (MaHang) REFERENCES HANG(MaHang)
+);
+INSERT INTO SANPHAM (MaSP, TenSP, DonViTinh, GiaBan, MaHang)
+VALUES ('SP001', N'Điện thoại iPhone 12', N'Cái', 25000000, 'H001'),
+       ('SP002', N'Tủ lạnh Panasonic', N'Cái', 15000000, 'H002'),
+       ('SP003', N'Áo sơ mi nam', N'Cái', 500000, 'H003'),
+	   ('SP004', N'Máy tính bảng Samsung', N'Cái', 8000000, 'H004'),
+       ('SP005', N'Máy giặt Electrolux', N'Cái', 10000000, 'H005'),
+       ('SP006', N'Kem dưỡng da Olay', N'Cái', 300000, 'H006'),
+       ('SP007', N'Bia Heineken lon', N'Lon', 25000, 'H007'),
+       ('SP008', N'Laptop Dell', N'Cái', 18000000, 'H008'),
+       ('SP009', N'Vợt cầu lông Yonex', N'Cái', 600000, 'H009'),
+       ('SP010', N'Tủ lạnh Hitachi', N'Cái', 20000000, 'H010');
+
+CREATE TABLE CHITIETHD (
+    MaHD CHAR(6),
+    MaSP CHAR(10),
+    SoLuongMua INT,
+    GiamGia FLOAT,
+    PRIMARY KEY (MaHD, MaSP),
+    FOREIGN KEY (MaHD) REFERENCES HOADON(MaHD),
+    FOREIGN KEY (MaSP) REFERENCES SANPHAM(MaSP)
+);
+CREATE INDEX IDX_CHITIETHD_MaSP ON CHITIETHD(MaSP);
+INSERT INTO CHITIETHD (MaHD, MaSP, SoLuongMua, GiamGia)
+VALUES ('HD001', 'SP001', 2, 0),
+       ('HD002', 'SP002', 1, 500000),
+       ('HD003', 'SP003', 5, 0),
+	   ('HD004', 'SP004', 3, 0),
+       ('HD005', 'SP005', 2, 0),
+       ('HD006', 'SP006', 4, 0),
+       ('HD007', 'SP007', 50, 0),
+       ('HD008', 'SP008', 1, 1000000),
+       ('HD009', 'SP009', 3, 0),
+       ('HD010', 'SP010', 2, 0);
+
+
+CREATE TABLE NHAPHANG (
+    MaNH CHAR(6) PRIMARY KEY,
+    SoLuongNhap INT,
+    GiaNhap FLOAT,
+    NgayNhap DATE,
+    MaSP CHAR(10),
+    FOREIGN KEY (MaSP) REFERENCES SANPHAM(MaSP)
+);
+CREATE INDEX IDX_NHAPHANG_MaSP ON NHAPHANG(MaSP);
+INSERT INTO NHAPHANG (MaNH, SoLuongNhap, GiaNhap, NgayNhap, MaSP)
+VALUES ('NH001', 20, 100000, '2024-01-15', 'SP001'),
+       ('NH002', 10, 500000, '2024-02-16', 'SP002'),
+       ('NH003', 15, 800000, '2024-03-17', 'SP003'),
+	   ('NH004', 30, 600000, '2024-05-18', 'SP004'),
+       ('NH005', 20, 900000, '2024-06-19', 'SP005'),
+       ('NH006', 40, 400000, '2024-07-20', 'SP006'),
+       ('NH007', 200, 18000, '2024-07-21', 'SP007'),
+       ('NH008', 5, 15000000, '2024-08-22', 'SP008'),
+       ('NH009', 10, 300000, '2024-10-23', 'SP009'),
+       ('NH010', 3, 25000000, '2024-12-24', 'SP010');
+
+
+CREATE PROCEDURE TongGiaNhapNam2024
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Tính tổng giá nhập cho từng tháng trong năm 2024
+    SELECT 
+        MONTH(NgayNhap) AS Thang,
+        SUM(SoLuongNhap * GiaNhap) AS TongGiaNhapThang
+    FROM NHAPHANG
+    WHERE YEAR(NgayNhap) = 2024
+    GROUP BY MONTH(NgayNhap)
+    ORDER BY Thang;
+
+    -- Tính tổng giá nhập cả năm 2024
+    SELECT 
+        SUM(SoLuongNhap * GiaNhap) AS TongGiaNhapNam
+    FROM NHAPHANG
+    WHERE YEAR(NgayNhap) = 2024;
+END;
+EXEC TongGiaNhapNam2024;
+
+
+
+
+
+CREATE PROCEDURE DoanhThuNam2024
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Tính doanh thu cho từng tháng trong năm 2024
+    SELECT 
+        MONTH(NgayLapHD) AS Thang,
+        SUM(TongTien) AS DoanhThuThang
+    FROM HOADON
+    WHERE YEAR(NgayLapHD) = 2024
+    GROUP BY MONTH(NgayLapHD)
+    ORDER BY Thang;
+
+    -- Tính tổng doanh thu cả năm 2024
+    SELECT 
+        SUM(TongTien) AS TongDoanhThuNam
+    FROM HOADON
+    WHERE YEAR(NgayLapHD) = 2024;
+END;
+EXEC DoanhThuNam2024;
+
+
+CREATE PROCEDURE pro_ThemSanPham
+    @MaSP CHAR(10),
+    @TenSP NVARCHAR(255),
+    @DonViTinh NVARCHAR(10),
+    @GiaBan FLOAT,
+    @MaHang CHAR(6)
+AS
+BEGIN
+    INSERT INTO SANPHAM (MaSP, TenSP, DonViTinh, GiaBan, MaHang)
+    VALUES (@MaSP, @TenSP, @DonViTinh, @GiaBan, @MaHang);
+END;
+
+CREATE PROCEDURE pro_SuaSanPham
+    @MaSP CHAR(10),
+    @TenSP NVARCHAR(255),
+    @DonViTinh NVARCHAR(10),
+    @GiaBan FLOAT,
+    @MaHang CHAR(6)
+AS
+BEGIN
+    UPDATE SANPHAM
+    SET TenSP = @TenSP,
+        DonViTinh = @DonViTinh,
+        GiaBan = @GiaBan,
+        MaHang = @MaHang
+    WHERE MaSP = @MaSP;
+END;
+
+CREATE PROCEDURE pro_XoaSanPham
+    @MaSP CHAR(10)
+AS
+BEGIN
+    DELETE FROM SANPHAM
+    WHERE MaSP = @MaSP;
+END;
+
+EXEC pro_ThemSanPham 'SP011', N'Máy giặt LG', N'Cái', 12000000, 'H002';
+EXEC pro_SuaSanPham 'SP011', N'Máy giặt Panasonic', N'Cái', 16000000, 'H002';
+EXEC pro_XoaSanPham 'SP011';
+
+
+
+
+CREATE PROCEDURE BaoCaoHoaDonNam2024
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Báo cáo hóa đơn trong năm 2024
+    SELECT 
+        MaHD AS 'Mã hóa đơn',
+        HoTenKH AS 'Tên khách hàng',
+        HoTenNV AS 'Tên nhân viên',
+        NgayLapHD AS 'Ngày lập hóa đơn',
+        TongTien AS 'Tổng tiền'
+    FROM HOADON h
+    INNER JOIN KHACHHANG k ON h.MaKH = k.MaKH
+    INNER JOIN NHANVIEN nv ON h.MaNV = nv.MaNV
+    WHERE YEAR(NgayLapHD) = 2024
+    ORDER BY NgayLapHD;
+END;
+EXEC BaoCaoHoaDonNam2024;
+
+
+
+CREATE PROCEDURE BaoCaoLuongHangDaBanNam2024
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Báo cáo lượng hàng đã bán trong năm 2024
+    SELECT 
+        sp.MaSP AS 'Mã sản phẩm',
+        sp.TenSP AS 'Tên sản phẩm',
+        sp.DonViTinh AS 'Đơn vị tính',
+        SUM(ch.SoLuongMua) AS 'Số lượng đã bán',
+        sp.GiaBan AS 'Giá bán',
+        SUM(ch.SoLuongMua * sp.GiaBan) AS 'Doanh thu'
+    FROM CHITIETHD ch
+    INNER JOIN SANPHAM sp ON ch.MaSP = sp.MaSP
+    INNER JOIN HOADON hd ON ch.MaHD = hd.MaHD
+    WHERE YEAR(hd.NgayLapHD) = 2024
+    GROUP BY sp.MaSP, sp.TenSP, sp.DonViTinh, sp.GiaBan
+    ORDER BY sp.MaSP;
+END;
+EXEC BaoCaoLuongHangDaBanNam2024;
+
+CREATE PROCEDURE MatHangBanChayNhat
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Báo cáo mặt hàng bán chạy nhất trong năm 2024
+    SELECT TOP 1
+        sp.MaSP AS 'Mã sản phẩm',
+        sp.TenSP AS 'Tên sản phẩm',
+        sp.DonViTinh AS 'Đơn vị tính',
+        SUM(ch.SoLuongMua) AS 'Số lượng đã bán',
+        sp.GiaBan AS 'Giá bán',
+        SUM(ch.SoLuongMua * sp.GiaBan) AS 'Doanh thu'
+    FROM CHITIETHD ch
+    INNER JOIN SANPHAM sp ON ch.MaSP = sp.MaSP
+    INNER JOIN HOADON hd ON ch.MaHD = hd.MaHD
+    WHERE YEAR(hd.NgayLapHD) = 2024
+    GROUP BY sp.MaSP, sp.TenSP, sp.DonViTinh, sp.GiaBan
+    ORDER BY SUM(ch.SoLuongMua) DESC;
+END;
+EXEC MatHangBanChayNhat;
+
+CREATE TRIGGER trg_UpdateTongTienHoaDon
+ON CHITIETHD
+AFTER INSERT, UPDATE, DELETE
+AS
+BEGIN
+    DECLARE @MaHD CHAR(6);
+
+    IF EXISTS (SELECT * FROM inserted)
+        SELECT @MaHD = MaHD FROM inserted;
+    ELSE
+        SELECT @MaHD = MaHD FROM deleted;
+
+    UPDATE HOADON
+    SET TongTien = (
+        SELECT SUM(sp.GiaBan * ch.SoLuongMua * (1 - ch.GiamGia)) AS TongTien
+        FROM CHITIETHD ch
+        INNER JOIN SANPHAM sp ON ch.MaSP = sp.MaSP
+        WHERE ch.MaHD = @MaHD
+        GROUP BY ch.MaHD
+    )
+    WHERE MaHD = @MaHD;
+END;
+
+
+-- Thêm một hóa đơn mới
+INSERT INTO HOADON (MaHD, MaKH, MaNV, NgayLapHD, TongTien)
+VALUES ('HD011', 'KH003', 'NV005', '2024-06-25', 3000000);
+
+-- Thay đổi chi tiết hóa đơn (cập nhật số lượng mua)
+UPDATE CHITIETHD
+SET SoLuongMua = 6
+WHERE MaHD = 'HD011' AND MaSP = 'SP003';
+
+-- Xóa một hóa đơn
+DELETE FROM HOADON WHERE MaHD = 'HD011';
+
