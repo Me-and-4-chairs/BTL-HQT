@@ -16,11 +16,22 @@ mô tả về bài toán: Để quản lý siêu thị cần thiết kế cơ s�
 
 # Chức năng:
 Bài toán quản lý siêu thị nhằm đảm bảo quản lý hiệu quả và tối ưu hóa nguồn tài nguyên:
+
 Quản lý thông tin sản phẩm : thêm , xóa , sửa thông tin, xem thông tin sản phẩm
+
 Quản lý các chức năng tính toán: Giá nhập, Doanh thu.
+
 Báo cáo hóa đơn, lượng hàng đã bán
+
 Tìm mặt hàng bán chạy nhất
+
 Sử dụng trigger để quản lý Hóa Đơn mới được cập nhật
 
 # Tạo cơ sở dữ liệu gồm các bảng
+tạo database:
 
+CREATE DATABASE QLST;
+GO
+-- Sử dụng cơ sở dữ liệu QuanLy
+USE QLST;
+GO
