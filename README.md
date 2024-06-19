@@ -116,3 +116,5 @@ CREATE TABLE NHAPHANG (
     FOREIGN KEY (MaSP) REFERENCES SANPHAM(MaSP)
 );
 ```
+sơ đồ liên kết thực thể :
+![image](https://github.com/Me-and-4-chairs/BTL-HQT/assets/168749315/91d444f9-928d-45ca-b716-dca443912310)
