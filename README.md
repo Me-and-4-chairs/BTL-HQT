@@ -36,3 +36,83 @@ GO
 USE QLST;
 GO
 ```
+
+Bảng nhân viên :
+```sql
+CREATE TABLE NHANVIEN (
+    MaNV CHAR(6) PRIMARY KEY,
+    HoTenNV NVARCHAR(30),
+    GioiTinh CHAR(3),
+    NgaySinh DATE,
+    DiaChi NVARCHAR(255),
+    DienThoai CHAR(10)
+);
+```
+
+Bảng khách hàng :
+```sql
+CREATE TABLE KHACHHANG (
+    MaKH CHAR(6) PRIMARY KEY,
+    HoTenKH NVARCHAR(30),
+    DiaChi NVARCHAR(255),
+    DienThoai CHAR(10)
+);
+```
+Bảng hóa đơn :
+```sql
+CREATE TABLE HOADON (
+    MaHD CHAR(6) PRIMARY KEY,
+    MaKH CHAR(6),
+    MaNV CHAR(6),
+    NgayLapHD DATE,
+    TongTien FLOAT,
+    FOREIGN KEY (MaKH) REFERENCES KHACHHANG(MaKH),
+    FOREIGN KEY (MaNV) REFERENCES NHANVIEN(MaNV)
+);
+```
+
+Bảng hàng :
+```sql
+CREATE TABLE HANG (
+    MaHang CHAR(6) PRIMARY KEY,
+    TenHang NVARCHAR(50),
+    DiaChi NVARCHAR(255)
+);
+```
+
+Bảng sản phẩm :
+```sql
+CREATE TABLE SANPHAM (
+    MaSP CHAR(10) PRIMARY KEY,
+    TenSP NVARCHAR(255),
+    DonViTinh NVARCHAR(10),
+    GiaBan FLOAT,
+    MaHang CHAR(6),
+    FOREIGN KEY (MaHang) REFERENCES HANG(MaHang)
+);
+```
+
+Bảng chi tiết hóa đơn :
+```sql
+CREATE TABLE CHITIETHD (
+    MaHD CHAR(6),
+    MaSP CHAR(10),
+    SoLuongMua INT,
+    GiamGia FLOAT,
+    PRIMARY KEY (MaHD, MaSP),
+    FOREIGN KEY (MaHD) REFERENCES HOADON(MaHD),
+    FOREIGN KEY (MaSP) REFERENCES SANPHAM(MaSP)
+);
+```
+
+Bảng chi nhập hàng  :
+```sql
+CREATE TABLE NHAPHANG (
+    MaNH CHAR(6) PRIMARY KEY,
+    SoLuongNhap INT,
+    GiaNhap FLOAT,
+    NgayNhap DATE,
+    MaSP CHAR(10),
+    FOREIGN KEY (MaSP) REFERENCES SANPHAM(MaSP)
+);
+```
