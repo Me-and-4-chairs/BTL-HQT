@@ -29,9 +29,10 @@ Sử dụng trigger để quản lý Hóa Đơn mới được cập nhật
 
 # Tạo cơ sở dữ liệu gồm các bảng
 tạo database:
-
+```sql
 CREATE DATABASE QLST;
 GO
 -- Sử dụng cơ sở dữ liệu QuanLy
 USE QLST;
 GO
+```
