@@ -117,4 +117,6 @@ CREATE TABLE NHAPHANG (
 );
 ```
 sơ đồ liên kết thực thể :
-![image](https://github.com/Me-and-4-chairs/BTL-HQT/assets/168749315/91d444f9-928d-45ca-b716-dca443912310)
+![image](https://github.com/Me-and-4-chairs/BTL-HQT/assets/168749315/f9630abe-2662-483d-8c53-ab2dab9097e4)
+
+
