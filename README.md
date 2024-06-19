@@ -1,4 +1,5 @@
 -- tác giả: ĐINH TRƯỜNG AN
+
 -- mô tả: Sản phẩm làm về quản lý siêu thị
 
 # Thông tin sinh viên
